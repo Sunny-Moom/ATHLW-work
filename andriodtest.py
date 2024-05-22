@@ -22,23 +22,46 @@ if __name__ == '__main__':
     print(devices)
     adb.cls()
     adb.adb_image(devices)
-    # ocr.find_text_in_image('无双斩', devices)
+    ocr.find_text_in_image('无双斩', devices)
     adb.adb_call("shell ime enable com.android.adbkeyboard/.AdbIME", devices)
     adb.adb_call("shell ime set com.android.adbkeyboard/.AdbIME", devices)
-    # cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)
-    # cv.find_and_act_on_image('wsz', 1, 1, 'click', 4,devices)
-    # cv.find_and_act_on_image('wsz', 2, 1, 'click', 4,devices)
-    # cv.find_and_act_on_image('wsz', 3, 1, 'click', 4,devices)
-    # input("验证码步骤请手动输入")
-    # # 验证码手动操作
-    # cv.find_and_act_on_image('wsz', 5, 1, 'click', 4,devices)
-    # cv.find_and_act_on_image('wsz', 5, 1, 'click', 4,devices)  #权限申请可复用
+    cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)
+    cv.find_and_act_on_image('wsz', 1, 1, 'click', 4, devices)
+    cv.find_and_act_on_image('wsz', 2, 1, 'click', 4, devices)
+    cv.find_and_act_on_image('wsz', 3, 1, 'click', 4, devices)
+    print("验证码步骤请手动输入")
+    # 验证码手动操作
+    cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)
+    cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)  #权限申请可复用
+    cv.find_and_act_on_image('wsz', 6, 1, 'report', None, devices)
     name, nameid = getuser()
-    ocr.find_text_in_image('请填写真实姓名',devices)
+    ocr.find_text_in_image('姓名', devices)
     adb.adb_inputs(name, devices)
-    ocr.find_text_in_image('请填写有效的身份证号',devices)
+    ocr.find_text_in_image('身份证号', devices)
     adb.adb_inputs(nameid, devices)
-    # cv.find_and_act_on_image('wsz', 6, 1, 'click',None,devices)
-    # cv.find_and_act_on_image('wsz', 7, 1, 'click',None,devices)
-    # cv.find_and_act_on_image('wsz', 8, 1, 'click', 4,devices)
-    # cv.find_and_act_on_image('wsz', 9, 1, 'click', 4,devices)
+    cv.find_and_act_on_image('wsz', 6, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 8, 1, 'click', None, devices)
+    # 寻区逻辑
+
+    # 练级逻辑
+    cv.find_and_act_on_image('wsz', 9, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 10, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 11, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 12, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 13, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 14, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 15, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 16, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 17, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 18, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 19, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 20, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 21, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 22, 1, 'click', None, devices)
+    while cv.find_and_act_on_image('wsz', 24, 10, 'click', 1, devices) is False:
+        cv.find_and_act_on_image('wsz', 25, 1, 'click', 1, devices)
+        cv.find_and_act_on_image('wsz', 23, 1, 'click', 1, devices)
+    # 寻帮逻辑
+
+
+
