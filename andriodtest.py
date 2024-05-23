@@ -1,5 +1,6 @@
 import json
 import sys
+import time
 
 import requests
 
@@ -17,33 +18,27 @@ def getuser():
     return data["username"], data["password"]
 
 
-if __name__ == '__main__':
-    devices = sys.argv[1]
-    print(devices)
-    adb.cls()
-    adb.adb_image(devices)
-    ocr.find_text_in_image('无双斩', devices)
-    adb.adb_call("shell ime enable com.android.adbkeyboard/.AdbIME", devices)
-    adb.adb_call("shell ime set com.android.adbkeyboard/.AdbIME", devices)
-    cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)
-    cv.find_and_act_on_image('wsz', 1, 1, 'click', 4, devices)
-    cv.find_and_act_on_image('wsz', 2, 1, 'click', 4, devices)
-    cv.find_and_act_on_image('wsz', 3, 1, 'click', 4, devices)
-    print("验证码步骤请手动输入")
-    # 验证码手动操作
-    cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)
-    cv.find_and_act_on_image('wsz', 5, 1, 'click', 4, devices)  #权限申请可复用
-    cv.find_and_act_on_image('wsz', 6, 1, 'report', None, devices)
-    name, nameid = getuser()
-    ocr.find_text_in_image('姓名', devices)
-    adb.adb_inputs(name, devices)
-    ocr.find_text_in_image('身份证号', devices)
-    adb.adb_inputs(nameid, devices)
-    cv.find_and_act_on_image('wsz', 6, 1, 'click', None, devices)
-    cv.find_and_act_on_image('wsz', 8, 1, 'click', None, devices)
-    # 寻区逻辑
+def getpost():
+    url = 'http://localhost:7888/your-endpoint'
+    data = "Your test message"
+    headers = {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
 
-    # 练级逻辑
+    response = requests.post(url, data=data, headers=headers)
+
+    # 输出指令内容
+    return response.text
+
+
+command = getpost()
+
+
+def leve():
+    """
+    练级
+    Returns:
+
+    """
+    global command
     cv.find_and_act_on_image('wsz', 9, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 10, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 11, 1, 'click', None, devices)
@@ -62,6 +57,60 @@ if __name__ == '__main__':
         cv.find_and_act_on_image('wsz', 25, 1, 'click', 1, devices)
         cv.find_and_act_on_image('wsz', 23, 1, 'click', 1, devices)
     # 寻帮逻辑
+    print("输入帮会名称")
+    while command.isdigit():
+        command = getpost()
+        time.sleep(2)
+    ocr_report = ocr.report_text_in_image('测试', devices)
+    adb.adb_touch(ocr_report[0] + 562, ocr_report[1])
+    cv.find_and_act_on_image('wsz', 27, 1, 'click', None, devices)
 
 
+if __name__ == '__main__':
+    devices = sys.argv[1]
+    print("请输入启动指令")
+    while command != '启动':
+        command = getpost()
+        time.sleep(2)
+    print("已启动")
+    print(devices)
+    # adb.cls()
+    adb.adb_image(devices)
+    # ocr.find_text_in_image('无双斩', devices)
+    adb.adb_call("shell ime enable com.android.adbkeyboard/.AdbIME", devices)
+    adb.adb_call("shell ime set com.android.adbkeyboard/.AdbIME", devices)
+    cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)
+    cv.find_and_act_on_image('wsz', 1, 2, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 2, 2, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 3, 2, 'click', None, devices)
+    print("验证码步骤请手动输入")
+    # 验证码手动操作
+    while command != '验证码':
+        command = getpost()
+        time.sleep(2)
+    cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)
+    cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)  # 权限申请可复用
+    cv.find_and_act_on_image('wsz', 6, 1, 'report', None, devices)
+    name, nameid = getuser()
+    ocr.find_text_in_image('姓名', devices)
+    adb.adb_inputs(name, devices)
+    ocr.find_text_in_image('身份证号', devices)
+    adb.adb_inputs(nameid, devices)
+    cv.find_and_act_on_image('wsz', 6, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 4, 1, 'click', None, devices)
+    # 寻区逻辑
+    print("输入区号")
+    while not command.isdigit():
+        command = getpost()
+        time.sleep(2)
+    ocr.find_text_in_image(command, devices)
+    # 练级逻辑
+    cv.find_and_act_on_image('wsz', 8, 1, 'click', None, devices)
+    leve()
+    cv.find_and_act_on_image('wsz', 28, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 29, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 30, 1, 'click', None, devices)
+    leve()
+    cv.find_and_act_on_image('wsz', 31, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 32, 1, 'click', None, devices)
 
