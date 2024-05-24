@@ -76,7 +76,6 @@ if __name__ == '__main__':
     print(devices)
     # adb.cls()
     adb.adb_image(devices)
-    # ocr.find_text_in_image('无双斩', devices)
     adb.adb_call("shell ime enable com.android.adbkeyboard/.AdbIME", devices)
     adb.adb_call("shell ime set com.android.adbkeyboard/.AdbIME", devices)
     cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)

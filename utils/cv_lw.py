@@ -25,8 +25,20 @@ def load_and_match_image(template_folder, image_num, devices=None):
     return template_width, template_height, np.where(result >= 0.8)
 
 
-def find_and_act_on_image(template_folder, image_num, cooldown, action, max_attempts=None,  devices=None):
-    """在屏幕上找到图像并执行操作（点击或返回坐标）。"""
+def find_and_act_on_image(template_folder, image_num, cooldown, action, max_attempts=None, devices=None):
+    """
+    在屏幕上找到图像并执行操作（点击或返回坐标）。
+    Args:
+        template_folder: 文件夹名
+        image_num: 图片编号
+        cooldown: 查找冷却时间
+        action: click为直接点击，report为不点击而输出坐标
+        max_attempts: 最大查找次数，None为无限次查找
+        devices: adb设备号
+
+    Returns:模板匹配成功输出True，反之输出False，当action为report时匹配成功输出坐标
+
+    """
     attempts = 0
     while max_attempts is None or attempts < max_attempts:
         attempts += 1
@@ -34,7 +46,7 @@ def find_and_act_on_image(template_folder, image_num, cooldown, action, max_atte
         if locations[0].size > 0:
             center = (locations[1][0] + width // 2, locations[0][0] + height // 2)
             if action == 'click':
-                adb.adb_touch(center[0], center[1],devices)
+                adb.adb_touch(center[0], center[1], devices)
                 time.sleep(cooldown)
                 return True
             elif action == 'report':
@@ -50,8 +62,20 @@ def find_and_act_on_image(template_folder, image_num, cooldown, action, max_atte
 
 
 def search_and_tap(template_folder, image_num, search_time, cooldown, devices=None):
-    """搜索一定时间的图像，如果找到则点击。"""
-    result = find_and_act_on_image(template_folder, image_num, cooldown, 'report', max_attempts=search_time, devices=devices)
+    """
+    搜索一定时间的图像，如果找到则点击。
+    Args:
+        template_folder:
+        image_num:
+        search_time:
+        cooldown:
+        devices:
+
+    Returns:
+
+    """
+    result = find_and_act_on_image(template_folder, image_num, cooldown, 'report', max_attempts=search_time,
+                                   devices=devices)
     if result:
-        adb.adb_touch(result[0], result[1],devices)
+        adb.adb_touch(result[0], result[1], devices)
         time.sleep(cooldown)
