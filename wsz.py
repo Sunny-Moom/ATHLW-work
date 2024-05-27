@@ -78,24 +78,24 @@ if __name__ == '__main__':
     adb.adb_image(devices)
     adb.adb_call("shell ime enable com.android.adbkeyboard/.AdbIME", devices)
     adb.adb_call("shell ime set com.android.adbkeyboard/.AdbIME", devices)
-    cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)
-    cv.find_and_act_on_image('wsz', 1, 2, 'click', None, devices)
-    cv.find_and_act_on_image('wsz', 2, 2, 'click', None, devices)
-    cv.find_and_act_on_image('wsz', 3, 2, 'click', None, devices)
-    print("验证码步骤请手动输入")
-    # 验证码手动操作
-    while command != '验证码':
-        command = getpost()
-        time.sleep(2)
-    cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)
-    cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)  # 权限申请可复用
-    cv.find_and_act_on_image('wsz', 6, 1, 'report', None, devices)
-    name, nameid = getuser()
-    ocr.find_text_in_image('姓名', devices)
-    adb.adb_inputs(name, devices)
-    ocr.find_text_in_image('身份证号', devices)
-    adb.adb_inputs(nameid, devices)
-    cv.find_and_act_on_image('wsz', 6, 1, 'click', None, devices)
+    # cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)
+    # cv.find_and_act_on_image('wsz', 1, 2, 'click', None, devices)
+    # cv.find_and_act_on_image('wsz', 2, 2, 'click', None, devices)
+    # cv.find_and_act_on_image('wsz', 3, 2, 'click', None, devices)
+    # print("验证码步骤请手动输入")
+    # # 验证码手动操作
+    # while command != '验证码':
+    #     command = getpost()
+    #     time.sleep(2)
+    # cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)
+    # cv.find_and_act_on_image('wsz', 5, 2, 'click', 4, devices)  # 权限申请可复用
+    # cv.find_and_act_on_image('wsz', 6, 1, 'report', None, devices)
+    # name, nameid = getuser()
+    # ocr.find_text_in_image('姓名', devices)
+    # adb.adb_inputs(name, devices)
+    # ocr.find_text_in_image('身份证号', devices)
+    # adb.adb_inputs(nameid, devices)
+    # cv.find_and_act_on_image('wsz', 6, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 4, 1, 'click', None, devices)
     # 寻区逻辑
     print("输入区号")
