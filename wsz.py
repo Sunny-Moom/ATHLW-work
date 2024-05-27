@@ -61,7 +61,7 @@ def leve():
     while command.isdigit():
         command = getpost()
         time.sleep(2)
-    ocr_report = ocr.report_text_in_image('测试', devices)
+    ocr_report = ocr.report_text_in_image(command, devices)
     adb.adb_touch(ocr_report[0] + 562, ocr_report[1])
     cv.find_and_act_on_image('wsz', 27, 1, 'click', None, devices)
 
