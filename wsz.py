@@ -62,6 +62,8 @@ def leve():
         time.sleep(2)
     ocr_report = ocr.report_text_in_image(command, devices)
     adb.adb_touch(ocr_report[0] + 562, ocr_report[1], devices)
+    cv.find_and_act_on_image('wsz', 23, 1, 'click', None, devices)
+    cv.find_and_act_on_image('wsz', 26, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 27, 1, 'click', None, devices)
 
 
