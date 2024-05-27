@@ -32,6 +32,16 @@ def getpost():
 command = getpost()
 
 
+def add_bang():
+    global command
+    print("输入帮会名称")
+    while command.isdigit():
+        command = getpost()
+        time.sleep(2)
+    ocr_report = ocr.report_text_in_image(command, devices)
+    adb.adb_touch(ocr_report[0] + 562, ocr_report[1], devices)
+
+
 def leve():
     """
     练级
@@ -56,12 +66,8 @@ def leve():
         cv.find_and_act_on_image('wsz', 25, 1, 'click', 1, devices)
         cv.find_and_act_on_image('wsz', 23, 1, 'click', 1, devices)
     # 寻帮逻辑
-    print("输入帮会名称")
-    while command.isdigit():
-        command = getpost()
-        time.sleep(2)
-    ocr_report = ocr.report_text_in_image(command, devices)
-    adb.adb_touch(ocr_report[0] + 562, ocr_report[1], devices)
+    while not cv.find_and_act_on_image('wsz', 33, 5, 'report', None, devices):
+        add_bang()
     cv.find_and_act_on_image('wsz', 23, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 26, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 27, 1, 'click', None, devices)
