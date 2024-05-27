@@ -51,9 +51,8 @@ def leve():
     cv.find_and_act_on_image('wsz', 18, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 19, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 20, 1, 'click', None, devices)
-    cv.find_and_act_on_image('wsz', 21, 1, 'click', None, devices)
     cv.find_and_act_on_image('wsz', 22, 1, 'click', None, devices)
-    while cv.find_and_act_on_image('wsz', 24, 10, 'click', 1, devices) is False:
+    while cv.find_and_act_on_image('wsz', 24, 4, 'click', 1, devices) is False:
         cv.find_and_act_on_image('wsz', 25, 1, 'click', 1, devices)
         cv.find_and_act_on_image('wsz', 23, 1, 'click', 1, devices)
     # 寻帮逻辑
